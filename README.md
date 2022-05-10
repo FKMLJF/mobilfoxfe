@@ -14,7 +14,7 @@
 
 ##Two priviliegs accounts:
 ### mobilfox.user readonly
-### mobilfoxadmin CRUD
+### mobilfox.admin CRUD
 
 
 ## Previews
