@@ -3,7 +3,9 @@
 ## How to use
 
 1.) `npm install`
+
 2.) run API, and set src/environments/environment.ts api_endpoin="http://yourapi:8081"
+
 3.) `ng serve`
 
 
