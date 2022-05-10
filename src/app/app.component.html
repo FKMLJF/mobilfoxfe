@@ -1,0 +1,27 @@
+
+  <nav class="navbar navbar-expand-lg bg-light navbar-light mb-3">
+    <a class="navbar-brand" *ngIf="isLoggedIn" [routerLink]="'/home'"><strong>MOBILFOX - RENT A DEVICE 🤩</strong></a>
+    <a class="navbar-brand" *ngIf="!isLoggedIn" [routerLink]="'/login'"><strong>MOBILFOX - RENT A DEVICE 🤩</strong></a>
+
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+      &#9776;
+    </button>
+
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+
+      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Sign In</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true; logout()">Logout</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
+  <h3 class="primary-color px-3" *ngIf="isLoggedIn">Hi, <strong>{{username}}</strong>! 😺</h3>
+  <router-outlet></router-outlet>

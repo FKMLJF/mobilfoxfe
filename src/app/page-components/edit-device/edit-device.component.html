@@ -1,0 +1,79 @@
+<div class="container p-0" *ngIf="form">
+  <div class="row justify-content-md-center">
+    <div class="col-md-6">
+      <p class="text-danger alert alert-danger"  *ngIf="form.get('errorMsq')?.value">{{form.get('errorMsq')?.value}}!</p>
+      <div class="alert alert-success" role="alert" *ngIf="succesfully">
+        Successfully! 🤩
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="card p-4">
+        <fieldset [disabled]="loading">
+          <div class="card-header mb-4">
+            <h5>
+              <button class="flex-grow-0 btn btn-light px-3" (click)="handleBack()">🔙</button>
+              <span *ngIf="deviceIdParam">Edit device, id: {{device.device_id}}</span>
+              <span *ngIf="!deviceIdParam">Create a new device</span></h5>
+          </div>
+
+          <div class="form-group">
+            <label>Device name</label>
+            <input  class="form-control" placeholder="Device name" type="text" formControlName="deviceName">
+          </div>
+
+          <div class="form-group">
+            <label>Device value <strong>$</strong></label>
+            <input  class="form-control" placeholder="Device value" type="text" formControlName="deviceValue">
+          </div>
+
+
+          <div class="form-group">
+            <label>Purchase Date</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="Purchase Date"
+                    formControlName="purchaseDate" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">📆</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>End Date (rent)</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="Purchase Date"
+                     formControlName="endDate" ngbDatepicker #d2="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">📆</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label>Tenant (current user)</label>
+            <select formControlName="currentOwner" class="form-control" (change)="handleChange($event)">
+              <option *ngFor="let item of userList" value="{{item.user_id}}" [selected]="item.user_id === device.current_owner">{{item.user_name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group" *ngIf="deviceIdParam">
+            <label>Last modify</label>
+            <p>{{device.last_modify}}</p>
+          </div>
+
+          <div class="form-group" *ngIf="deviceIdParam">
+            <label>Last modifier</label>
+            <p>{{device.last_mofifier_plain}}</p>
+          </div>
+
+
+
+          <div class="d-flex flex-row-reverse">
+            <button type="submit" class="btn btn-outline-success" [disabled]="!form.valid">post</button>
+          </div>
+        </fieldset>
+      </form>
+
+    </div>
+  </div>
+</div>
+

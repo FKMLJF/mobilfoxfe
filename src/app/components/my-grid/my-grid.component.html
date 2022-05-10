@@ -1,0 +1,35 @@
+<button class="btn btn-success mb-2" (click)="handleNewDevice()">Add ➕</button>
+<table class="table table-hover table-borderless table-light">
+  <thead>
+  <tr class="bg-light">
+    <th>Device id</th>
+    <th>Device name</th>
+    <th>Device value $</th>
+    <th>Purchase date</th>
+    <th>Rent end date</th>
+    <th>Last modify date</th>
+    <th>Last modifier</th>
+    <th>Current tenant</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of DeviceList">
+        <td>{{item.device_id}}</td>
+        <td>{{item.device_name}}</td>
+        <td>{{item.device_value}} $</td>
+        <td>{{item.purchase_date}}</td>
+        <td>{{item.end_date}}</td>
+        <td>{{item.last_modify}}</td>
+        <td>{{item.last_mofifier_plain}}</td>
+        <td>{{item.current_owner_plain}}</td>
+        <td>
+          <div class="btn btn-group">
+            <button class="btn btn-info"  (click)="handleDetails(item.device_id)">Details</button>
+            <button class="btn btn-warning" [disabled]="!isAdmin()" (click)="handleEdit(item.device_id)">Edit</button>
+            <button class="btn btn-danger" [disabled]="!isAdmin()" (click)="handleDelete(item.device_id)">Delete</button>
+          </div>
+        </td>
+    </tr>
+  </tbody>
+</table>
